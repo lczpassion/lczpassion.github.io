@@ -18,124 +18,213 @@
     <meta property="og:image" content="undefined"/>
   
 
-  <link href="/favicon.png" rel="icon">
+  <link href="/favicon.ico" rel="shortcut icon">
   <link rel="alternate" href="/atom.xml" title="随潮而动" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script src="/js/dist/xlsx.core.min.js"></script>
   
 
 </head>
 
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">随潮而动</a></h1>
-  <h2><a href="/">心有猛虎,细嗅蔷薇</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
+  <header id="header" class="inner"><div id="nav-top">
+  <div class="alignleft main-title">
+    <h1>随潮而动</h1>
+    <h2>心有猛虎,细嗅蔷薇</h2>
+  </div>
+  <nav id="main-nav" class="alignright">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
   <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
+</div></header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
   
   <div class="post-content">
     <header>
       
+      <div class="alignright">
+        <a id="/about/index.html" class="pageviews"></a>
+      </div>
+      
       
   
     <h1 class="title"></h1>
   
 
+      
     </header>
     <div class="entry">
       
+        
+          
+        
         <p>95后,青岛某大学大二生,email:lczpassion@gmail.com</p>
 
       
     </div>
     <footer>
       
-        
-        
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
+      
+      
+        <div class="alignright share-box">
+  
+</div>
       
       <div class="clearfix"></div>
     </footer>
   </div>
 </article>
 
-
 <section id="comment">
-  <h1 class="title">留言</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http:lczpassion.com/about/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="<%= page.path %>" data-title="<%= page.title %>" data-url="<%= page.permalink %>"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"lczpassion"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
 </section>
 
+
+
+  <script type="text/javascript">
+  var views = sessionStorage.getItem('/about/index.html');
+  console.log(views)
+  if (views != null) {
+    var post = document.getElementById('/about/index.html');
+    post.innerHTML = views;
+    post.style.display = "inline";
+  } else {
+    var flag = sessionStorage.getItem('http:lczpassion.com' + "/pageviews/" + '0');
+if (flag == "yes"){
+  var paths = null
+  $.each(paths, function(index, path){
+    var post = document.getElementById(path);
+    var views = sessionStorage.getItem(path);
+    if (views != null) {
+      post.innerHTML = views;
+      post.style.display = "inline";
+    }
+  });
+} else if (flag == null){
+  if(typeof require !== 'undefined') XLSX = require('xlsx');
+
+  var url = "https://docs.google.com/spreadsheets/d/" + 'null' + "/export";
+  var oReq = new XMLHttpRequest();
+  oReq.open("GET", url, true);
+  oReq.responseType = "arraybuffer";
+
+  oReq.onload = function(e) {
+    var arraybuffer = oReq.response;
+
+    /* convert data to binary string */
+    var data = new Uint8Array(arraybuffer);
+	var arr = new Array();
+	for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+	var bstr = arr.join("");
+
+	/* Call XLSX */
+	var workbook = XLSX.read(bstr, {type:"binary"});
+
+    /* DO SOMETHING WITH workbook HERE */
+	var json = to_json(workbook);
+
+	$.each(json., function(index, item){
+  if(item. == '/about/index.html'){
+    var post = document.getElementById(item.);
+    post.innerHTML = item.undefined;
+    post.style.display = "inline";
+    sessionStorage.setItem(item., item.undefined);
+  }
+})
+  }
+
+  oReq.send();
+}
+
+function to_json(workbook) {
+  var result = {};
+  workbook.SheetNames.forEach(function(sheetName) {
+	var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+      if(roa.length > 0){
+		result[sheetName] = roa;
+	  }
+  });
+  return result;
+}
+  }
+</script>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜索">
-    <input type="hidden" name="q" value="site:http:lczpassion.com">
-  </form>
+  
+    <form action="//google.com/search" method="get" accept-charset="utf-8">
+      <input type="search" name="q" results="0" placeholder="搜索">
+      <input type="hidden" name="q" value="site:http:lczpassion.com">
+    </form>
+  
 </div>
 
   
 
   
+
+  <div class="widget tag"> 
+   <h3 class="title">友情链接</h3> 
+   <ul class="entry"> 
+    <li><a href="http://www.baidu.com" title="lczpassion">百度</a></li> 
+   </ul> 
+</div>
+
+
+
 </aside>
     <div class="clearfix"></div>
   </div>
-  <footer id="footer" class="inner"><div class="alignleft">
+  <footer id="footer" class="inner"><div id="foot-nav">
+  <ul class="social">
+    
+      <li><a class="github" href="https://github.com/DaiXiang" title="github">github</a></li>
+    
+      <li><a class="rss" href="/atom.xml" title="rss">rss</a></li>
+    
+      <li><a class="weibo" href="" title="weibo">weibo</a></li>
+    
+  </ul>
+</div>
+<div>
   
-  &copy; 2015 李飞侠
+    &copy; 2015 李飞侠
   
 </div>
 <div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-
-
+  
 
 
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
@@ -146,5 +235,52 @@
 })(jQuery);
 </script>
 
+
+<script type="text/javascript">
+  function navbar() {
+    var top = $('#nav-top').innerHeight();
+    $('#header').css('min-height', top);
+  }
+  navbar();
+  $(window).resize(navbar);
+</script>
+<div id="totop" class="footer-btn to-top">
+  <a title="返回顶部"></a>
+</div>
+
+<script type="text/javascript">
+  $(function(){ 
+	// When to show the scroll link
+	// higher number = scroll link appears further down the page   
+	var upperLimit = 800;
+	
+	// Our scroll link element
+	var scrollElem = $('#totop');
+   
+	// Scroll to top speed
+	var scrollSpeed = 500;
+   
+	// Show and hide the scroll to top link based on scroll position   
+	scrollElem.hide();
+	$(window).scroll(function () {            
+		var scrollTop = $(document).scrollTop();       
+		if ( scrollTop > upperLimit ) {
+		  $(scrollElem).stop().fadeTo(300, 1); // fade back in
+		  $(scrollElem).animate({bottom: "58px"}, { queue: false, duration: 10 });
+		} else {
+		  $(scrollElem).stop().fadeTo(300, 0); // fade out
+	      $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+			
+		}
+	});
+
+	// Scroll to top animation on click
+	$(scrollElem).click(function(){
+	  $('html, body').animate({scrollTop:0}, scrollSpeed);
+	  $(scrollElem).animate({bottom: "-200px"}, { queue: false, duration: 10 });
+	  return false;
+	});
+  });
+</script>
 </body>
 </html>

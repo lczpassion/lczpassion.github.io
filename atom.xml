@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title><![CDATA[随潮而动]]></title>
+  <title><![CDATA[随潮而动,随势而行]]></title>
   <subtitle><![CDATA[心有猛虎,细嗅蔷薇]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http:lczpassion.com/"/>
-  <updated>2015-05-16T14:40:15.000Z</updated>
+  <updated>2015-05-19T13:05:49.000Z</updated>
   <id>http:lczpassion.com/</id>
   
   <author>
@@ -15,19 +15,80 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[格式化输出]]></title>
+    <link href="http:lczpassion.com/2015/05/19/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/"/>
+    <id>http:lczpassion.com/2015/05/19/格式化输出/</id>
+    <published>2015-05-19T11:02:12.000Z</published>
+    <updated>2015-05-19T13:05:49.000Z</updated>
+    <content type="html"><![CDATA[<hr>
+<blockquote>
+<p>今天做了<code>Python</code>的一个小练习，发现<code>str.format()</code>方法用的不熟，现在来整理一下。注：运行环境是Python 3.4.1</p>
+</blockquote>
+<hr>
+<p>官方文档中是这样说的 <strong><em>The built-in string class provides the ability to do complex variable substitutions and value formatting via the format() method</em></strong>(这个内置的string类通过format()方法提供了去做复杂的变量替换和值格式化的能力）。那么如何把值转化成字符串？<code>Python</code>提供了<code>str()</code>和<code>repr()</code>函数。函数<code>str()</code>把值转换成易于人阅读的形式，函数<code>repr()</code>转换成解释器阅读的模式。</p>
+<hr>
+<p>文档中的一个例子:平方和立方表<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    print(repr(x).rjust(<span class="number">2</span>), repr(x*x).rjust(<span class="number">3</span>), end=<span class="string">' '</span>)</span><br><span class="line">    print(repr(x*x*x).rjust(<span class="number">4</span>))</span><br></pre></td></tr></table></figure></p>
+<p>官方文档说<code>str.rjust()</code>把字符串输出到一列，并通过向左侧填充空格来使其右对齐(<strong><em>但我自己运行并不右对齐</em></strong>)。类似的方法还有<code>str.ljust()</code>和<code>str.center()</code>。<br>输出结果如下：</p>
+<hr>
+<p> 1   1    1<br> 2   4    8<br> 3   9   27<br> 4  16   64<br> 5  25  125<br> 6  36  216<br> 7  49  343<br> 8  64  512<br> 9  81  729<br>10 100 1000</p>
+<hr>
+<p>还有一种方法就是<code>str.format()</code>用法了:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>):</span><br><span class="line">    print(<span class="string">'&#123;0:2d&#125; &#123;1:3d&#125; &#123;2:4d&#125;'</span>.format(x,x*x,x*x*x))</span><br></pre></td></tr></table></figure></p>
+<h2 id="这个方法看起来是不是简洁许多？">这个方法看起来是不是简洁许多？</h2><p><code>str.format()</code>基本用法:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> ((<span class="string">'Hello &#123;&#125; , &#123;&#125;'</span>).format(<span class="string">'World'</span>, <span class="string">'HaHa'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:Hello World , HaHa</p>
+<hr>
+<p>大括号和其中的字符会被替换成<code>str.format()</code>的参数。大括号中的数值指明使用传入<code>str.format()</code>中的数值是哪一个，如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0&#125; &#123;1&#125;'</span>.format(<span class="string">'a'</span>,<span class="string">'b'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:a b<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0&#125; &#123;1&#125;'</span>.format(<span class="string">'b'</span>,<span class="string">'a'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:b a</p>
+<hr>
+<p>如果在<code>str.format()</code>调用时使用关键字参数，可以通过参数名引用，如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'Hello &#123;a&#125;, &#123;b&#125;'</span>.format(</span><br><span class="line">	b = <span class="string">'HaHa'</span>,a = <span class="string">'World'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:Hello World, HaHa</p>
+<hr>
+<p>字段名后可用<code>:</code>和格式指令如：将Pi转为２位精度：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">print(<span class="string">'&#123;0: .2f&#125;'</span>.format(math.pi))</span><br></pre></td></tr></table></figure></p>
+<p>result:3.14</p>
+<hr>
+<p>在字段后的<code>:</code>的后面加一个整数会限定该字段的最小宽度，前面的平方和立方表就用到了这个用法。</p>
+<hr>
+<h1 id="旧的格式化操作符%">旧的格式化操作符<code>%</code></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">print( <span class="string">'%3.2f'</span> %math.pi)</span><br></pre></td></tr></table></figure>
+<p>result:3.14</p>
+<hr>
+<h1 id="几个栗子:">几个栗子:</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">'&#123;0&#125;&#123;1&#125;&#123;0&#125;'</span>.format(<span class="string">'abra'</span>, <span class="string">'cad'</span>) )</span><br></pre></td></tr></table></figure>
+<p>result:abracadabra(参数指数可重复)</p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">'&#123;:&lt;30&#125;'</span>.format(<span class="string">'left aligned'</span>) ) </span><br><span class="line"><span class="comment">#'left aligned                  '</span></span><br><span class="line">print(<span class="string">'&#123;:&gt;30&#125;'</span>.format(<span class="string">'right aligned'</span>) )</span><br><span class="line"><span class="comment">#'                 right aligned'</span></span><br><span class="line">print(<span class="string">'&#123;:^30&#125;'</span>.format(<span class="string">'centered'</span>) )</span><br><span class="line"><span class="comment">#'           centered           '</span></span><br><span class="line">print(<span class="string">'&#123;:*^30&#125;'</span>.format(<span class="string">'centered'</span>) )</span><br><span class="line"><span class="comment">#'***********centered***********'</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;:,&#125;'</span>.format(<span class="number">1234567890</span>) )</span><br></pre></td></tr></table></figure>
+<p>result: 1,234,567,890(使用逗号作为千位分隔符)</p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">d = datetime.datetime(<span class="number">2015</span>,<span class="number">5</span>,<span class="number">19</span>,<span class="number">20</span>,<span class="number">57</span>,<span class="number">30</span>)</span><br><span class="line">print(<span class="string">'&#123;:%Y-%m-%d %H:%M:%S&#125;'</span>.format(d))</span><br></pre></td></tr></table></figure>
+<p>result: 2015-05-19 20:57:30</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<hr>
+<blockquote>
+<p>今天做了<code>Python</code>的一个小练习，发现<code>str.format()</code>方法用的不熟，现在来整理一下。注：运行环境是Python 3.4.1</p>
+</blockquote>
+<hr>
+<p>官]]>
+    </summary>
+    
+      <category term="Python" scheme="http:lczpassion.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[我的一亩三分地]]></title>
     <link href="http:lczpassion.com/2015/05/16/%E6%88%91%E7%9A%84%E4%B8%80%E4%BA%A9%E4%B8%89%E5%88%86%E5%9C%B0/"/>
     <id>http:lczpassion.com/2015/05/16/我的一亩三分地/</id>
     <published>2015-05-16T10:03:31.000Z</published>
-    <updated>2015-05-16T14:40:15.000Z</updated>
+    <updated>2015-05-17T11:29:30.000Z</updated>
     <content type="html"><![CDATA[<hr>
 <blockquote>
 <p>终于搭建好了我的第一个博客,虽然过程是痛苦的但结局还是好的O(∩_∩)O哈！</p>
 </blockquote>
 <hr>
-<h1 id="1-_过程">1. 过程</h1><p>我先讲一下我搭blog痛苦的过程吧.首先选择一个框架(毕竟不懂前端,没法自己写o(╯□╰)o),<a href="http://hexo.io/zh-cn/" target="_blank" rel="external"><strong><em>hexo</em></strong></a> 顺势映入眼帘,然后就搜到了<a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external"><strong><em>如何搭建一个独立博客——简明Github Pages与Hexo教程</em></strong></a>,按照这个教程,我在<strong><em>godaddy</em></strong>上购买了域名并搭建在我的<strong><em>github</em></strong>上,到这里还是比较顺的,当然作为一个英语渣在godaddy上买域名还是不容易的(哭),<strong><em>重头戏来了</em></strong>,在模板上面我先后用了<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external"><strong><em>yilia</em></strong></a>,<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external"><strong><em>next</em></strong></a>,<a href="https://github.com/hexojs/hexo-theme-light" target="_blank" rel="external"><strong><em>light</em></strong></a>以及各种它们的子模板……没错,你没看错,我的模版最后还是选择了yilia,为什么呢?因为作为我的第一个blog,我还是希望它能完美一些,就想往上面加一些功能,但是不会前端啊,尼玛啊,现在又不想去学(活该).就去网上找教程,但yilia不容易改,出现各种问题,别的模板改完自己也不喜欢,就这样浪费了不少时间(哭),最终还是选择了Litten大神的yillia，在这里谢谢大神O(∩_∩)O。</p>
+<h1 id="1-_过程">1. 过程</h1><p>我先讲一下我搭blog痛苦的过程吧.首先选择一个框架(毕竟不懂前端,没法自己写o(╯□╰)o),<a href="http://hexo.io/zh-cn/" target="_blank" rel="external"><strong><em>hexo</em></strong></a> 顺势映入眼帘,然后就搜到了<a href="http://cnfeat.com/2014/05/10/2014-05-11-how-to-build-a-blog/" target="_blank" rel="external"><strong><em>如何搭建一个独立博客——简明Github Pages与Hexo教程</em></strong></a>,按照这个教程,我在<strong><em>godaddy</em></strong>上购买了域名并搭建在我的<strong><em>github</em></strong>上,到这里还是比较顺的,当然作为一个英语渣在godaddy上买域名还是不容易的(哭),<code>重头戏来了</code>,在模板上面我先后用了<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external"><strong><em>yilia</em></strong></a>,<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external"><strong><em>next</em></strong></a>,<a href="https://github.com/hexojs/hexo-theme-light" target="_blank" rel="external"><strong><em>light</em></strong></a>以及各种它们的子模板……没错,你没看错,我的模版最后还是选择了yilia,为什么呢?因为作为我的第一个blog,我还是希望它能完美一些,就想往上面加一些功能,但是不会前端啊,尼玛啊,现在又不想去学(活该).就去网上找教程,但yilia不容易改,出现各种问题,别的模板改完自己也不喜欢,就这样浪费了不少时间(哭),最终还是选择了Litten大神的yillia，在这里谢谢大神O(∩_∩)O。</p>
 <hr>
-<h1 id="2-_目的">2. 目的</h1><p>建这个blog的主要目的还是为了<strong><em>学习</em></strong>（不要打脸！,啪啪，叫你装！）。我平常学习以自学为主，所以有些东西可能学的不够扎实，我希望在<strong><em>blog</em></strong>上定期写写总结来巩固一下，当然也可能扯扯淡，自己的blog就是自己的一亩三分地，自己想些什么就写什么，比较自由。还有两年就要毕业了，也希望到时候再回过头来能发现自己的<strong><em>成长</em></strong>。</p>
+<h1 id="2-_目的">2. 目的</h1><p>建这个blog的主要目的还是为了<code>学习</code>（不要打脸！,啪啪，叫你装！）。我平常学习以自学为主，所以有些东西可能学的不够扎实，我希望在<strong><em>blog</em></strong>上定期写写总结来巩固一下，当然也可能扯扯淡，自己的blog就是自己的一亩三分地，自己想些什么就写什么，比较自由。还有两年就要毕业了，也希望到时候再回过头来能发现自己的<code>成长</code>。</p>
 <hr>
 <p><img src="http://i2.17173.itc.cn/2013/news/2013/09/06/gk0906hayao05.jpg" alt=""></p>
 ]]></content>

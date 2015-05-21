@@ -111,7 +111,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Python/" style="font-size: NaNpx;">Python</a><a href="/tags/杂谈/" style="font-size: NaNpx;">杂谈</a>
+						<a href="/tags/Python/" style="font-size: 20px;">Python</a><a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a>
 					</div>
 				</section>
 				
@@ -180,6 +180,82 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-collections-deque" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/21/collections-deque/" class="article-date">
+  	<time datetime="2015-05-21T10:34:13.000Z" itemprop="datePublished">2015-05-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/21/collections-deque/">Collections.deque</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>官方文档对collections的描述为:This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.</p>
+</blockquote>
+<hr>
+<h2 id="deque_objects"><code>deque</code> objects</h2><p>用法: <code>class collections.deque([iterable][,maxlen])</code> ,如果<strong><em>maxlen</em></strong>不是具体的或者是<strong><em>None</em></strong>,<code>deque</code>将没有界限，<code>deque</code>不会超过<strong><em>maxlen</em></strong>这个最大值。当<code>deque</code>满了，一旦有新的元素加进来的时候，就会有相应的元素被丢弃。</p>
+<hr>
+<h2 id="Deque_对象支持以下方法：">Deque 对象支持以下方法：</h2><blockquote>
+<ul>
+<li>append(x) : 把 x 加到 deque 的右侧</li>
+<li>appendleft(x) : 把 x 加到 deque 的左侧</li>
+<li>clear() : 删除所有元素</li>
+<li>count(x) : 计算 deque 元素的数量(这是在3.2后新加进来的)</li>
+<li>extend(iterable) : 在 deque 的右边加上可迭代的元素</li>
+<li>extendleft(iterable) : 在 deque 的左边加上可迭代的元素，注意:加上的结果是相反于可迭代的内容</li>
+<li>pop() : 从 deque 的右边删除并返回一个元素，如果现在没有元素，raise an IndexError</li>
+<li>popleft() : 从 deque 的左边删除并返回一个元素，如果现在没有元素，raise an IndexError</li>
+<li>remove(value) : 删除第一次出现的value，如果没有找到，raise ValueError</li>
+<li>reverse() : 颠倒 deque 中的元素并返回None(这是在3.2后新加进来的)</li>
+<li>rotate(n) : 从 n 到最右边循环这个 deque，如果 n 是负数，向左循环，向右旋转一步等于d.appendleft(d.pop())</li>
+<li>Deque　对象还提供了一个只读的属性 : maxlen </li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="你可能会说：没什么特别的啊？">你可能会说：没什么特别的啊？</h2><p>像<code>insert(0,v)</code> , <code>pop(0)</code> 对应着　<code>appendleft()</code> , <code>popleft()</code> ,看起来没什么区别，但实际上还是有区别的。尽管<code>list</code>支持简单的操作，但是它的时间复杂度是<strong><em>O(n)</em></strong>,随　n　的增加而增加，而<code>deque</code>则是<strong><em>O(1)</em></strong>,所以当项目有时间需求时，还是要用<code>deque</code>的。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
   
     <article id="post-格式化输出" class="article article-type-post" itemscope itemprop="blogPost">
   

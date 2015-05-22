@@ -3,26 +3,26 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Collections.deque | 随潮而动,随势而行</title>
+  <title>heapq-堆列算法 | 随潮而动,随势而行</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="官方文档对collections的描述为:This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.
+  <meta name="description" content="This module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.   —来自厚重的Python文档
 
 
-deque objects用法: class">
+Heap是一种二叉树，它的每一个父节点的值都小于或等于它的子节点。用数组完成了这个实现，在这个二叉树中，heap[k] &amp;lt;= hea">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Collections.deque">
-<meta property="og:url" content="http:lczpassion.com/2015/05/21/collections-deque/index.html">
+<meta property="og:title" content="heapq-堆列算法">
+<meta property="og:url" content="http:lczpassion.com/2015/05/21/heapq-堆列算法/index.html">
 <meta property="og:site_name" content="随潮而动,随势而行">
-<meta property="og:description" content="官方文档对collections的描述为:This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.
+<meta property="og:description" content="This module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.   —来自厚重的Python文档
 
 
-deque objects用法: class">
+Heap是一种二叉树，它的每一个父节点的值都小于或等于它的子节点。用数组完成了这个实现，在这个二叉树中，heap[k] &amp;lt;= hea">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Collections.deque">
-<meta name="twitter:description" content="官方文档对collections的描述为:This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.
+<meta name="twitter:title" content="heapq-堆列算法">
+<meta name="twitter:description" content="This module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.   —来自厚重的Python文档
 
 
-deque objects用法: class">
+Heap是一种二叉树，它的每一个父节点的值都小于或等于它的子节点。用数组完成了这个实现，在这个二叉树中，heap[k] &amp;lt;= hea">
   
     <link rel="alternative" href="/atom.xml" title="随潮而动,随势而行" type="application/atom+xml">
   
@@ -188,11 +188,11 @@ deque objects用法: class">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-collections-deque" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-heapq-堆列算法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/05/21/collections-deque/" class="article-date">
-  	<time datetime="2015-05-21T10:34:13.000Z" itemprop="datePublished">2015-05-21</time>
+      <a href="/2015/05/21/heapq-堆列算法/" class="article-date">
+  	<time datetime="2015-05-21T12:35:41.000Z" itemprop="datePublished">2015-05-21</time>
 </a>
     </div>
   
@@ -205,7 +205,7 @@ deque objects用法: class">
         
   
     <h1 class="article-title" itemprop="name">
-      Collections.deque
+      heapq-堆列算法
     </h1>
   
 
@@ -226,29 +226,32 @@ deque objects用法: class">
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>官方文档对collections的描述为:This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.</p>
+<p>This module provides an implementation of the heap queue algorithm, also known as the priority queue algorithm.   —来自厚重的Python文档</p>
 </blockquote>
 <hr>
-<h2 id="deque_objects"><code>deque</code> objects</h2><p>用法: <code>class collections.deque([iterable][,maxlen])</code> ,如果<strong><em>maxlen</em></strong>不是具体的或者是<strong><em>None</em></strong>,<code>deque</code>将没有界限，<code>deque</code>不会超过<strong><em>maxlen</em></strong>这个最大值。当<code>deque</code>满了，一旦有新的元素加进来的时候，就会有相应的元素被丢弃。</p>
+<p><code>Heap</code>是一种二叉树，它的每一个父节点的值都小于或等于它的子节点。用数组完成了这个实现，在这个二叉树中，<code>heap[k] &lt;= heap[2*k+1] , heap[k] &lt;= heap[2*k+2]</code> , 即树顶的数是最小的。</p>
 <hr>
-<h2 id="Deque_对象支持以下方法：">Deque 对象支持以下方法：</h2><blockquote>
+<h2 id="heapq_提供了以下几个函数:">heapq　提供了以下几个函数:</h2><blockquote>
 <ul>
-<li>append(x) : 把 x 加到 deque 的右侧</li>
-<li>appendleft(x) : 把 x 加到 deque 的左侧</li>
-<li>clear() : 删除所有元素</li>
-<li>count(x) : 计算 deque 元素的数量(这是在3.2后新加进来的)</li>
-<li>extend(iterable) : 在 deque 的右边加上可迭代的元素</li>
-<li>extendleft(iterable) : 在 deque 的左边加上可迭代的元素，注意:加上的结果是相反于可迭代的内容</li>
-<li>pop() : 从 deque 的右边删除并返回一个元素，如果现在没有元素，raise an IndexError</li>
-<li>popleft() : 从 deque 的左边删除并返回一个元素，如果现在没有元素，raise an IndexError</li>
-<li>remove(value) : 删除第一次出现的value，如果没有找到，raise ValueError</li>
-<li>reverse() : 颠倒 deque 中的元素并返回None(这是在3.2后新加进来的)</li>
-<li>rotate(n) : 从 n 到最右边循环这个 deque，如果 n 是负数，向左循环，向右旋转一步等于d.appendleft(d.pop())</li>
-<li>Deque　对象还提供了一个只读的属性 : maxlen </li>
+<li>heapq.heappush(heap,item) : 把 item 的值压入 heap</li>
+<li>heaoq.heappop(heap) : 从 heao 中 pop 并返回最小的 item , 如果 heap 是空的，IndexError raised,想不用 popping 访问最小的 item , 用 heap[0]</li>
+<li>heapq.heappushpop(heap,item) : 把 item 压入堆中，然后pop并返回最小的item</li>
+<li>heapq.heaplfy(x) : 把 list x 转换成　heap</li>
+<li>heapq.heapreplace(heap,item) : 从 heao 中 pop 并返回最小的 item , 并且压入新的 item </li>
+<li>heapq.merge(*iterables) : 把多个有序输入转化成一个单一的输出。    </li>
+<li>heapq.nlarget(n,iterable,key=None) : 返回一个有n个最大元素的 list ,如果提供了 key，那么每一个元素就会和 key 进行比较</li>
+<li>heapq.nsmallest(n,iterable,key=None) : 同 nlarget 相反</li>
 </ul>
 </blockquote>
 <hr>
-<h2 id="你可能会说：没什么特别的啊？">你可能会说：没什么特别的啊？</h2><p>像<code>insert(0,v)</code> , <code>pop(0)</code> 对应着　<code>appendleft()</code> , <code>popleft()</code> ,看起来没什么区别，但实际上还是有区别的。尽管<code>list</code>支持简单的操作，但是它的时间复杂度是<strong><em>O(n)</em></strong>,随　n　的增加而增加，而<code>deque</code>则是<strong><em>O(1)</em></strong>,所以当项目有时间需求时，还是要用<code>deque</code>的。</p>
+<p>The latter two functions perform best for smaller values of n. For larger values, it is more efficient to use the <code>sorted()</code> function. Also, when <code>n==1</code>, it is more efficient to use the built-in <code>min()</code> and <code>max()</code> functions. If repeated usage of these functions is required, consider turning the iterable into an actual heap.</p>
+<hr>
+<h1 id="例子:">例子:</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapsort</span><span class="params">(iterable)</span>:</span></span><br><span class="line">	h = []</span><br><span class="line">	<span class="keyword">for</span> value <span class="keyword">in</span> iterable:</span><br><span class="line">		heapq.heappush(h,value)</span><br><span class="line">	<span class="keyword">print</span> ([heapq.heappop(h) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(h))])</span><br><span class="line"></span><br><span class="line">heapsort([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+<p>result : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line">h = []</span><br><span class="line">heapq.heappush(h,(<span class="number">1</span>,<span class="string">'write code'</span>))</span><br><span class="line">heapq.heappush(h,(<span class="number">5</span>,<span class="string">'write code'</span>))</span><br><span class="line">heapq.heappush(h,(<span class="number">2</span>,<span class="string">'write code'</span>))</span><br><span class="line"><span class="keyword">print</span> (heapq.heappop(h))</span><br></pre></td></tr></table></figure>
+<p>result : (1, ‘write code’) </p>
+<hr>
 
       
     </div>
@@ -258,18 +261,18 @@ deque objects用法: class">
     
 <nav id="article-nav">
   
-    <a href="/2015/05/21/heapq-堆列算法/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/05/22/我所理解的人生的意义/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          heapq-堆列算法
+          我所理解的人生的意义
         
       </div>
     </a>
   
   
-    <a href="/2015/05/19/格式化输出/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">格式化输出</div>
+    <a href="/2015/05/21/collections-deque/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Collections.deque</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -298,7 +301,7 @@ deque objects用法: class">
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="collections-deque" data-title="Collections.deque" data-url="http:lczpassion.com/2015/05/21/collections-deque/"></div>
+	<div class="ds-thread" data-thread-key="heapq-堆列算法" data-title="heapq-堆列算法" data-url="http:lczpassion.com/2015/05/21/heapq-堆列算法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

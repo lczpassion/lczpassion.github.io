@@ -183,6 +183,78 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Python-operator" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/26/Python-operator/" class="article-date">
+  	<time datetime="2015-05-26T12:38:55.000Z" itemprop="datePublished">2015-05-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/26/Python-operator/">Python operator模块</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>operator.attrgetter(*attrs)</code>:从操作对象取出<code>attr</code>并返回一个可调用的对象。如果超过一个attr,返回一个attributes的元组。这个attribute的名字可以包含圆点。例子:</p>
+<blockquote>
+<ul>
+<li>After f = attrgetter(‘name’), the call f(b) returns b.name.</li>
+<li>After f = attrgetter(‘name’, ‘date’), the call f(b) returns (b.name, b.date).</li>
+<li>After f = attrgetter(‘name.first’, ‘name.last’), the call f(b) returns (b.name.first, b.name.last).<br>等于:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">attrgetter</span><span class="params">(*items)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> any(<span class="keyword">not</span> isinstance(item, str) <span class="keyword">for</span> item <span class="keyword">in</span> items):</span><br><span class="line">		<span class="keyword">raise</span> TypeError(<span class="string">'attribute name must be a string'</span>)</span><br><span class="line">	<span class="keyword">if</span> len(items) == <span class="number">1</span>:</span><br><span class="line">		attr = items[<span class="number">0</span>]</span><br><span class="line">		<span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(obj)</span>:</span></span><br><span class="line">			<span class="keyword">return</span> resolve_attr(obj, attr)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		<span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(obj)</span>:</span></span><br><span class="line">			<span class="keyword">return</span> tuple(resolve_attr(obj, attr) <span class="keyword">for</span> attr <span class="keyword">in</span> items)</span><br><span class="line">	<span class="keyword">return</span> g</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resolve_attr</span><span class="params">(obj,attr)</span>:</span></span><br><span class="line">	<span class="keyword">for</span> name <span class="keyword">in</span> attr.split(<span class="string">"."</span>):</span><br><span class="line">		obj = getattr(obj,name)</span><br><span class="line">	<span class="keyword">return</span> obj</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p><code>operator.itemgetter(*items)</code> :</p>
+<blockquote>
+<ul>
+<li>After f = itemgetter(2), the call f(r) returns r[2].</li>
+<li>After g = itemgetter(2, 5, 3), the call g(r) returns (r[2], r[5], r[3]).<br>等于:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">itemgetter</span><span class="params">(*items)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(items) == <span class="number">1</span>:</span><br><span class="line">        item = items[<span class="number">0</span>]</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(obj)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> obj[item]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(obj)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> tuple(obj[item] <span class="keyword">for</span> item <span class="keyword">in</span> items)</span><br><span class="line">    <span class="keyword">return</span> g</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>这个函数可以<code>通过某个关键字排序一个字典列表</code>,比如要排序:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = [</span><br><span class="line">	&#123;<span class="string">'name'</span> : <span class="string">'xiaoming'</span> , <span class="string">'score'</span> : <span class="number">80</span>&#125;,</span><br><span class="line">	&#123;<span class="string">'name'</span> : <span class="string">'xianghong'</span> , <span class="string">'score'</span> : <span class="number">89</span>&#125;,</span><br><span class="line">	&#123;<span class="string">'name'</span> : <span class="string">'xiangzhang'</span> , <span class="string">'score'</span> : <span class="number">55</span>&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>可以这样实现:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line">a_by_name = sorted(a, key=itemgetter(<span class="string">'name'</span>))</span><br><span class="line">a_by_score = sorted(a, key=itemgetter(<span class="string">'score'</span>))</span><br><span class="line">print(a_by_name)</span><br><span class="line">print(a_by_score)</span><br></pre></td></tr></table></figure></p>
+<p>结果:[{‘name’: ‘xianghong’, ‘score’: 89}, {‘name’: ‘xiangzhang’, ‘score’: 55}, {‘name’: ‘xiaoming’, ‘score’: 80}]<br>[{‘name’: ‘xiangzhang’, ‘score’: 55}, {‘name’: ‘xiaoming’, ‘score’: 80}, {‘name’: ‘xianghong’, ‘score’: 89}]</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-我所理解的人生的意义" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">

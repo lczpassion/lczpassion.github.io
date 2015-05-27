@@ -209,7 +209,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>operator.attrgetter(*attrs)</code>:从操作对象取出<code>attr</code>并返回一个可调用的对象。如果超过一个attr,返回一个attributes的元组。这个attribute的名字可以包含圆点。例子:</p>
+        <p>1.<code>operator.attrgetter(*attrs)</code>:从操作对象取出<code>attr</code>并返回一个可调用的对象。如果超过一个attr,返回一个attributes的元组。这个attribute的名字可以包含圆点。例子:</p>
 <blockquote>
 <ul>
 <li>After f = attrgetter(‘name’), the call f(b) returns b.name.</li>
@@ -218,7 +218,10 @@
 </li>
 </ul>
 </blockquote>
-<p><code>operator.itemgetter(*items)</code> :</p>
+<p>这个函数可以用来排序同类型的对象，比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        self.user_id = user_id</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'User(&#123;&#125;)'</span>.format(self.user_id)</span><br><span class="line">users = [User(<span class="number">23</span>), User(<span class="number">3</span>), User(<span class="number">99</span>)]</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> attrgetter</span><br><span class="line"><span class="keyword">print</span> (sorted(users, key=attrgetter(<span class="string">'user_id'</span>)))</span><br></pre></td></tr></table></figure></p>
+<p>等价于:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(sorted(users, key=<span class="keyword">lambda</span> u: u.user_id))</span><br></pre></td></tr></table></figure></p>
+<p>函数<code>attrgetter()</code>运行速度通常要快一点，并且还允许多个字段同时比较。</p>
+<p>2.<code>operator.itemgetter(*items)</code> :</p>
 <blockquote>
 <ul>
 <li>After f = itemgetter(2), the call f(r) returns r[2].</li>

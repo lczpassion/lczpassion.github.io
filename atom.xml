@@ -125,7 +125,7 @@
     <link href="http:lczpassion.com/2015/05/21/collections%E6%A8%A1%E5%9D%97/"/>
     <id>http:lczpassion.com/2015/05/21/collections模块/</id>
     <published>2015-05-21T10:34:13.000Z</published>
-    <updated>2015-05-28T10:45:41.000Z</updated>
+    <updated>2015-05-28T12:07:42.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>官方文档对collections的描述为:This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.</p>
 </blockquote>
@@ -163,6 +163,18 @@
 <p>result: 33</p>
 <p>如果你想通过使用名称来访问元素，可以用这个函数，比如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line">Person = namedtuple(<span class="string">'Person'</span>, [<span class="string">'name'</span>, <span class="string">'weight'</span>])</span><br><span class="line">sub = Person(<span class="string">'xiaoming'</span>, <span class="string">'75kg'</span>)</span><br><span class="line"><span class="keyword">print</span> (sub.name)</span><br><span class="line">print(sub.weight)</span><br></pre></td></tr></table></figure></p>
 <p>result : xiaoming<br>75kg</p>
+<h2 id="4-ChainMap_objects">4.ChainMap objects</h2><p>New in version 3.3.<br><code>class collections.ChainMap(*maps)</code>:支持所有普通的字典方法。</p>
+<blockquote>
+<ul>
+<li>maps : 一个用户可以更新的映射表。这个表至少包含一个映射。</li>
+<li>new_child(m=None) : 返回一个新的<code>ChainMap</code>,如果指定了m,那么m在列表的最前面。</li>
+<li>parents : 返回一个新的<code>ChainMap</code>包含除了第一个map外的所有maps。</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'z'</span>: <span class="number">3</span> &#125;</span><br><span class="line">b = &#123;<span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'z'</span>: <span class="number">4</span> &#125;</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> ChainMap</span><br><span class="line">c = ChainMap(a,b)</span><br><span class="line"><span class="keyword">print</span> (c[<span class="string">'x'</span>])</span><br><span class="line">print(c[<span class="string">'y'</span>]) </span><br><span class="line">print(c[<span class="string">'z'</span>])</span><br><span class="line">print(c[<span class="string">'z'</span>])</span><br></pre></td></tr></table></figure>
+<p>result : 1,2,3,3, 可以看到如果先从a找到，就不再从b中找。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">values = ChainMap()</span><br><span class="line">values[<span class="string">'x'</span>] = <span class="number">1</span></span><br><span class="line">values = values.new_child()</span><br><span class="line">values[<span class="string">'x'</span>] = <span class="number">2</span></span><br><span class="line">values = values.new_child()</span><br><span class="line">values[<span class="string">'x'</span>] = <span class="number">3</span></span><br><span class="line"><span class="keyword">print</span> (values)</span><br></pre></td></tr></table></figure></p>
+<p>result : ChainMap({‘x’: 3}, {‘x’: 2}, {‘x’: 1})<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> (values[<span class="string">'x'</span>])</span><br><span class="line">values = values.parents</span><br><span class="line"><span class="keyword">print</span> (values[<span class="string">'x'</span>])</span><br></pre></td></tr></table></figure></p>
+<p>result : 3, 2</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<blockquote>

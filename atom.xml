@@ -4,7 +4,7 @@
   <subtitle><![CDATA[心有猛虎,细嗅蔷薇]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http:lczpassion.com/"/>
-  <updated>2015-05-27T10:46:55.000Z</updated>
+  <updated>2015-06-01T13:12:53.000Z</updated>
   <id>http:lczpassion.com/</id>
   
   <author>
@@ -13,6 +13,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Python textwrap模块]]></title>
+    <link href="http:lczpassion.com/2015/06/01/Python-textwrap%E6%A8%A1%E5%9D%97/"/>
+    <id>http:lczpassion.com/2015/06/01/Python-textwrap模块/</id>
+    <published>2015-06-01T12:47:19.000Z</published>
+    <updated>2015-06-01T13:12:53.000Z</updated>
+    <content type="html"><![CDATA[<p><code>textwrap</code>对字符串的打印还是有用的，比如你有以下一个长字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"No mattert what terrible things happen to you today，\</span><br><span class="line">you should'n feel sorrowful.\</span><br><span class="line">It is because that today is the youngest you'll ever be for the rest of your life."</span></span><br></pre></td></tr></table></figure></p>
+<p>函数<code>textwrap.fill(text, width=70, **kwargs)</code>，例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line">print(textwrap.fill(s, <span class="number">55</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result :<br>No mattert what terrible things happen to you today，you<br>should’n feel sorrowful.It is because that today is the<br>youngest you’ll ever be for the rest of your life.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line">print(textwrap.fill(s))</span><br></pre></td></tr></table></figure></p>
+<p>result :<br>No mattert what terrible things happen to you today，you should’n feel<br>sorrowful.It is because that today is the youngest you’ll ever be for<br>the rest of your life.</p>
+<p>函数<code>initial_indent</code> , 例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line">print(textwrap.fill(s, <span class="number">55</span>, initial_indent=<span class="string">'       '</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result :<br>       No mattert what terrible things happen to you<br>today，you should’n feel sorrowful.It is because that<br>today is the youngest you’ll ever be for the rest of<br>your life.</p>
+<p>函数<code>subsequent_indent</code> ,例子:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line">print(textwrap.fill(s, <span class="number">55</span>, subsequent_indent=<span class="string">'    	'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result :<br>No mattert what terrible things happen to you today，you<br>        should’n feel sorrowful.It is because that today<br>        is the youngest you’ll ever be for the rest of<br>        your life.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><code>textwrap</code>对字符串的打印还是有用的，比如你有以下一个长字符串:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line"]]>
+    </summary>
+    
+      <category term="Python" scheme="http:lczpassion.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Python operator模块]]></title>

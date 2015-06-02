@@ -183,6 +183,99 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-格式化输出" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/19/格式化输出/" class="article-date">
+  	<time datetime="2015-05-19T11:02:12.000Z" itemprop="datePublished">2015-05-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/19/格式化输出/">Python 格式化输出</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<blockquote>
+<p>今天做了<code>Python</code>的一个小练习，发现<code>str.format()</code>方法用的不熟，现在来整理一下。注：运行环境是Python 3.4.1</p>
+</blockquote>
+<hr>
+<p>官方文档中是这样说的 <strong><em>The built-in string class provides the ability to do complex variable substitutions and value formatting via the format() method</em></strong>(这个内置的string类通过format()方法提供了去做复杂的变量替换和值格式化的能力）。那么如何把值转化成字符串？<code>Python</code>提供了<code>str()</code>和<code>repr()</code>函数。函数<code>str()</code>把值转换成易于人阅读的形式，函数<code>repr()</code>转换成解释器阅读的模式。</p>
+<hr>
+<p>文档中的一个例子:平方和立方表<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">    print(repr(x).rjust(<span class="number">2</span>), repr(x*x).rjust(<span class="number">3</span>), end=<span class="string">' '</span>)</span><br><span class="line">    print(repr(x*x*x).rjust(<span class="number">4</span>))</span><br></pre></td></tr></table></figure></p>
+<p>官方文档说<code>str.rjust()</code>把字符串输出到一列，并通过向左侧填充空格来使其右对齐(<strong><em>但我自己运行并不右对齐</em></strong>)。类似的方法还有<code>str.ljust()</code>和<code>str.center()</code>。<br>输出结果如下：</p>
+<hr>
+<p> 1   1    1<br> 2   4    8<br> 3   9   27<br> 4  16   64<br> 5  25  125<br> 6  36  216<br> 7  49  343<br> 8  64  512<br> 9  81  729<br>10 100 1000</p>
+<hr>
+<p>还有一种方法就是<code>str.format()</code>用法了:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>):</span><br><span class="line">    print(<span class="string">'&#123;0:2d&#125; &#123;1:3d&#125; &#123;2:4d&#125;'</span>.format(x,x*x,x*x*x))</span><br></pre></td></tr></table></figure></p>
+<h2 id="这个方法看起来是不是简洁许多？">这个方法看起来是不是简洁许多？</h2><p><code>str.format()</code>基本用法:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> ((<span class="string">'Hello &#123;&#125; , &#123;&#125;'</span>).format(<span class="string">'World'</span>, <span class="string">'HaHa'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:Hello World , HaHa</p>
+<hr>
+<p>大括号和其中的字符会被替换成<code>str.format()</code>的参数。大括号中的数值指明使用传入<code>str.format()</code>中的数值是哪一个，如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0&#125; &#123;1&#125;'</span>.format(<span class="string">'a'</span>,<span class="string">'b'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:a b<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0&#125; &#123;1&#125;'</span>.format(<span class="string">'b'</span>,<span class="string">'a'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:b a</p>
+<hr>
+<p>如果在<code>str.format()</code>调用时使用关键字参数，可以通过参数名引用，如：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'Hello &#123;a&#125;, &#123;b&#125;'</span>.format(</span><br><span class="line">	b = <span class="string">'HaHa'</span>,a = <span class="string">'World'</span>))</span><br></pre></td></tr></table></figure></p>
+<p>result:Hello World, HaHa</p>
+<hr>
+<p>字段名后可用<code>:</code>和格式指令如：将Pi转为２位精度：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">print(<span class="string">'&#123;0: .2f&#125;'</span>.format(math.pi))</span><br></pre></td></tr></table></figure></p>
+<p>result:3.14</p>
+<hr>
+<p>在字段后的<code>:</code>的后面加一个整数会限定该字段的最小宽度，前面的平方和立方表就用到了这个用法。</p>
+<hr>
+<h1 id="旧的格式化操作符%">旧的格式化操作符<code>%</code></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">print( <span class="string">'%3.2f'</span> %math.pi)</span><br></pre></td></tr></table></figure>
+<p>result:3.14</p>
+<hr>
+<h1 id="几个栗子:">几个栗子:</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">'&#123;0&#125;&#123;1&#125;&#123;0&#125;'</span>.format(<span class="string">'abra'</span>, <span class="string">'cad'</span>) )</span><br></pre></td></tr></table></figure>
+<p>result:abracadabra(参数指数可重复)</p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">'&#123;:&lt;30&#125;'</span>.format(<span class="string">'left aligned'</span>) ) </span><br><span class="line"><span class="comment">#'left aligned                  '</span></span><br><span class="line">print(<span class="string">'&#123;:&gt;30&#125;'</span>.format(<span class="string">'right aligned'</span>) )</span><br><span class="line"><span class="comment">#'                 right aligned'</span></span><br><span class="line">print(<span class="string">'&#123;:^30&#125;'</span>.format(<span class="string">'centered'</span>) )</span><br><span class="line"><span class="comment">#'           centered           '</span></span><br><span class="line">print(<span class="string">'&#123;:*^30&#125;'</span>.format(<span class="string">'centered'</span>) )</span><br><span class="line"><span class="comment">#'***********centered***********'</span></span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;:,&#125;'</span>.format(<span class="number">1234567890</span>) )</span><br></pre></td></tr></table></figure>
+<p>result: 1,234,567,890(使用逗号作为千位分隔符)</p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">d = datetime.datetime(<span class="number">2015</span>,<span class="number">5</span>,<span class="number">19</span>,<span class="number">20</span>,<span class="number">57</span>,<span class="number">30</span>)</span><br><span class="line">print(<span class="string">'&#123;:%Y-%m-%d %H:%M:%S&#125;'</span>.format(d))</span><br></pre></td></tr></table></figure>
+<p>result: 2015-05-19 20:57:30</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-我的一亩三分地" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
